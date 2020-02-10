@@ -1,0 +1,37 @@
+#title {
+  text-align: center;
+  font-family: 'Libre Baskerville';
+  margin-top: 25%;
+}
+
+#subtitle-text span {
+  display: inline-block;
+}
+
+#continue-text {
+  text-align: center;
+  font-family: 'Roboto';
+  font-weight: 300;
+}
+
+#main-box {
+  margin: auto;
+  text-align: center;
+  font-size: 16pt;
+}
+
+#main-box div {
+  margin: auto;
+  display: none;
+  text-align: center;
+  font-size: 16pt;
+}
+
+#continue-text {
+  margin: 0px;
+  padding: 0px;
+}
+
+#have {
+  background-color: blue;
+}
