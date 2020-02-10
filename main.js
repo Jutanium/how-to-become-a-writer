@@ -37,7 +37,13 @@ const afterFunctions = {
     tl.to("#nine-certainty", 1, {"font-weight": 700});
   },
   11: (tl) => {
-    tl.to("#eleven-little", 1, {"letter-spacing": 3, "font-size": "12pt", autoRound: false})
+    tl.to("#eleven-little", 1, {"letter-spacing": 3, "font-size": "12px", autoRound: false})
+  },
+  16: (tl) => {
+    tl.set("#sixteen-font-change", {"font-family": "Inconsolata"});
+    tl.set("#sixteen-font-change", {"font-family": "Libre Baskerville"}, "+=0.5");
+    tl.set("#sixteen-font-change", {"font-family": "'Indie Flower', cursive"}, "+=0.5");
+    tl.set("#sixteen-font-change", {"font-family": "Roboto"}, "+=0.5");
   }
 }
 initializeTimelines();
@@ -70,7 +76,7 @@ function initializeTimelines() {
     newTl.to(child, 0, {display: 'block'});
     for (let j = 0; j < child.children.length; j++) {
       const subchild = child.children[j];
-      const duration = subchild.dataset.duration ? Number(subchild.dataset.duration) : subchild.textContent.length * 0.06;
+      const duration = subchild.dataset.duration ? Number(subchild.dataset.duration) : subchild.textContent.length * 0.07;
       const breakDuration = 0.5;
       const from = {text: ""};
       const to = {text: subchild.textContent, ease:"sine"};
