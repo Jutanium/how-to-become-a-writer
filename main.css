@@ -15,7 +15,7 @@
 }
 
 #main-box {
-  margin: auto;
+  margin: auto 25%;
   text-align: center;
   font-size: 16pt;
 }
@@ -23,7 +23,7 @@
 #main-box div {
   margin: auto;
   display: none;
-  text-align: center;
+  text-align: left;
   font-size: 16pt;
 }
 
