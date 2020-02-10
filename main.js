@@ -19,12 +19,11 @@ const afterFunctions = {
   4: (tl) => {
     tl.to(".four-fade-out", 1, {opacity: 0})
     tl.to("#four-you", 0.5, {"margin-right": -120}, "+=0.6")
-    //tl.set("#four-insert", {opacity: 1});
     tl.to("#four-insert", 2, {text: "sit down to write", 
       onComplete: () => {tl.pause(); waitBefore(tl.play.bind(tl))}}, "+=0.2")
     tl.to("#jutan-span", 2, {ease: "none", rotation:90, opacity:0, y:600});
     tl.to("#dan-span", 2, {ease: "none", rotation:90, opacity:0, y:600}, "-=1");
-    //tl.to("#by-span", 2, {ease: "none", rotation:90, opacity:0, y:600}, "-=0.2");
+    tl.to("#by-span", 2, {ease: "none", rotation:90, opacity:0, y:600}, "-=0.2");
   },
   6: (tl) => {
     tl.to("#six-accomplishments", 1, {opacity: 0}, "+=0.5");
@@ -71,7 +70,7 @@ function initializeTimelines() {
     newTl.to(child, 0, {display: 'block'});
     for (let j = 0; j < child.children.length; j++) {
       const subchild = child.children[j];
-      const duration = subchild.dataset.duration ? Number(subchild.dataset.duration) : subchild.textContent.length * 0.08;
+      const duration = subchild.dataset.duration ? Number(subchild.dataset.duration) : subchild.textContent.length * 0.06;
       const breakDuration = 0.5;
       const from = {text: ""};
       const to = {text: subchild.textContent, ease:"sine"};
