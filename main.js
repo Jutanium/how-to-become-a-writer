@@ -40,10 +40,12 @@ const afterFunctions = {
     tl.to("#eleven-little", 1, {"letter-spacing": 3, "font-size": "12px", autoRound: false})
   },
   16: (tl) => {
-    tl.set("#sixteen-font-change", {"font-family": "Inconsolata"});
-    tl.set("#sixteen-font-change", {"font-family": "Libre Baskerville"}, "+=0.5");
-    tl.set("#sixteen-font-change", {"font-family": "'Indie Flower', cursive"}, "+=0.5");
-    tl.set("#sixteen-font-change", {"font-family": "Roboto"}, "+=0.5");
+    const wait = () => {tl.pause(); waitBefore(tl.play.bind(tl))};
+    tl.set({}, {onComplete: wait});
+    tl.set("#sixteen-font-change", {"font-family": "Inconsolata", onComplete: wait});
+    tl.set("#sixteen-font-change", {"font-family": "Libre Baskerville", onComplete: wait}, "+=0.2");
+    tl.set("#sixteen-font-change", {"font-family": "Roboto", onComplete: wait}, "+=0.2");
+    tl.set("#sixteen-font-change", {"font-family": "'Indie Flower', cursive", onComplete: wait}, "+=0.2");
   }
 }
 initializeTimelines();
@@ -60,6 +62,8 @@ function initializeTimelines() {
   
   const showFirst = timeline();
   showFirst.to("#title", {duration: 1.5, "margin-top": "5%"});
+  showFirst.to("#inspired", {duration: 0.8, "opacity": 0.8, "line-height": '20pt', display: 'inline'})
+  showFirst.to("#inspired", {duration: 1, "opacity": 0, display: 'none'}, "+=2.8")
   showFirst.fromTo("#main-box", 1, {display:'none', autoAlpha:0}, {display:'block', autoAlpha: 1});
 
   const contents = get("main-box").children;
@@ -76,7 +80,7 @@ function initializeTimelines() {
     newTl.to(child, 0, {display: 'block'});
     for (let j = 0; j < child.children.length; j++) {
       const subchild = child.children[j];
-      const duration = subchild.dataset.duration ? Number(subchild.dataset.duration) : subchild.textContent.length * 0.07;
+      const duration = subchild.dataset.duration ? Number(subchild.dataset.duration) : subchild.textContent.length * 0.06;
       const breakDuration = 0.5;
       const from = {text: ""};
       const to = {text: subchild.textContent, ease:"sine"};

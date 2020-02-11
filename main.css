@@ -4,6 +4,12 @@
   margin-top: 25%;
 }
 
+#inspired {
+  display: none;
+  opacity: 0;
+  line-height: 0pt;
+}
+
 #subtitle-text span {
   display: inline-block;
 }
