@@ -41,3 +41,7 @@
 #have {
   background-color: blue;
 }
+
+.smaller-font {
+  font-size: 14pt;
+}

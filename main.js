@@ -39,6 +39,12 @@ const afterFunctions = {
   11: (tl) => {
     tl.to("#eleven-little", 1, {"letter-spacing": 3, "font-size": "12px", autoRound: false})
   },
+  17: (tl) => {
+    for (let i = 1; i <= 4; i++) {
+      tl.set("#strikethrough-" + i, {"text-decoration": "line-through"}, "+=0.1");
+    }
+    tl.to("#seventeen-insert", 1, {text: "You keep your writing close."}, "+=.5");
+  },
   16: (tl) => {
     const wait = () => {tl.pause(); waitBefore(tl.play.bind(tl))};
     tl.set({}, {onComplete: wait});
@@ -46,6 +52,36 @@ const afterFunctions = {
     tl.set("#sixteen-font-change", {"font-family": "Libre Baskerville", onComplete: wait}, "+=0.2");
     tl.set("#sixteen-font-change", {"font-family": "Roboto", onComplete: wait}, "+=0.2");
     tl.set("#sixteen-font-change", {"font-family": "'Indie Flower', cursive", onComplete: wait}, "+=0.2");
+  },
+  19: (tl) => {
+    tl.set({}, {onComplete: ()=>{
+      const text = get("continue-text")
+      text.innerText = "Look a little closer (zoom in)";
+      text.style.fontStyle = "14pt";
+      text.style.fontWeight = "300";
+      text.style.marginTop = "10px";
+      const lastWidth = window.innerWidth
+      window.onresize = () =>
+      {
+        if (lastWidth > window.innerWidth) {
+          tween.progress(1);
+          text.innerText = ". . .";
+          text.style.fontStyle = "16pt";
+          text.style.fontWeight = "700";
+        }
+      }
+      cont.play();
+      const tween = tl.to({}, 1000, {});
+    }});
+  },
+  20: (tl) => {
+    const wait = () => {tl.pause(); waitBefore(tl.play.bind(tl))};
+    const insertSpan = get("twenty-insert");
+    const insertString = "You write."
+    tl.set({}, {onComplete: wait});
+    for (let i = 1; i <= insertString.length; i++) {
+      tl.set(insertSpan, {text: insertString.substring(0, i), onComplete: wait}, "+=0.1");
+    }
   }
 }
 initializeTimelines();
@@ -103,6 +139,7 @@ function initializeTimelines() {
 
 function waitBefore (callback) {
   cont.play();
+  console.log("Setting a keypress!");
   const onPress = (e) => {
     cont.restart();
     cont.pause();
