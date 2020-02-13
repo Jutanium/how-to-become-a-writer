@@ -145,6 +145,8 @@ function cueEnding() {
     const charCode = event.keyCode || event.which;
     //if (charCode >= 48 && charCode <=)
     const charStr = String.fromCharCode(charCode);
+    console.log(charCode);
+    console.log(charStr);
     get("ending-insert").innerText += charStr;
   });
   document.addEventListener("keydown", (e) => {
@@ -160,6 +162,7 @@ function cueEnding() {
 
 function waitBefore (callback) {
   cont.play();
+  console.log("Setting a keypress!");
   const onPress = (e) => {
     cont.restart();
     cont.pause();
