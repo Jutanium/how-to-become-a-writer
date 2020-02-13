@@ -116,7 +116,7 @@ function initializeTimelines() {
     newTl.to(child, 0, {display: 'block'});
     for (let j = 0; j < child.children.length; j++) {
       const subchild = child.children[j];
-      const duration = subchild.dataset.duration ? Number(subchild.dataset.duration) : subchild.textContent.length * 0.06;
+      const duration = subchild.dataset.duration ? Number(subchild.dataset.duration) : subchild.textContent.length * 0.05;
       const breakDuration = 0.5;
       const from = {text: ""};
       const to = {text: subchild.textContent, ease:"sine"};
@@ -134,12 +134,32 @@ function initializeTimelines() {
       afterFunctions[index](newTl);
     }
   }
-  
+}
+
+function cueEnding() {
+  cont.restart();
+  cont.pause()
+  gsap.to("#blinking-cursor", {duration: 1, opacity:1, display: 'inline', yoyo: true, repeat:-1});
+  document.addEventListener("keypress", (e) => {
+    const event = e || window.event;
+    const charCode = event.keyCode || event.which;
+    //if (charCode >= 48 && charCode <=)
+    const charStr = String.fromCharCode(charCode);
+    get("ending-insert").innerText += charStr;
+  });
+  document.addEventListener("keydown", (e) => {
+    const event = e || window.event;
+    const charCode = event.keyCode || event.which;
+    const innerText =  get("ending-insert").innerText;
+    if (charCode === 8) {
+      get("ending-insert").innerText = innerText.substring(0, innerText.length - 1);
+    }
+  })
+
 }
 
 function waitBefore (callback) {
   cont.play();
-  console.log("Setting a keypress!");
   const onPress = (e) => {
     cont.restart();
     cont.pause();
@@ -158,7 +178,11 @@ function waitBeforeNext (cleanup) {
     }
     const next = () => {
       currTimeline++;
-      timelines[currTimeline].play();
+      if (currTimeline < timelines.length) {
+        timelines[currTimeline].play();
+      } else {
+        cueEnding();
+      }
     }
     if (cleanup) {
       cleanup(next)
